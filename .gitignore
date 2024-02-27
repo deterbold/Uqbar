@@ -1,0 +1,20 @@
+# Dependency directory
+node_modules/
+
+# macOS system files
+.DS_Store
+
+# Environment variables
+.env
+
+# Logs
+*.log
+
+# Build directory
+dist/
+
+# Other common directories to consider ignoring
+# coverage/     # Directory used by test coverage tools
+# .cache/       # Cache directories like those used by Babel
+# tmp/          # Temporary files
+# .vscode/      # Visual Studio Code workspace settings

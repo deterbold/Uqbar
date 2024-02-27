@@ -1,0 +1,92 @@
+/* General body styling */
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #fbd1a2; /* Warm background color */
+}
+
+#webcamContainer {
+    display: flex;
+    flex-direction: column; /* Stack the video and button vertically */
+    align-items: center; /* Center-align children horizontally */
+    margin-top: 20px; /* Optional: Adds some space from the top of the page */
+}
+
+#video {
+    max-width: 90%; /* Adjust as needed to control the size of the video */
+    border-radius: 8px; /* Optional: Adds rounded corners to the video */
+}
+
+#capture {
+    margin-top: 20px; /* Space between the video and the button */
+    padding: 10px 20px; /* Increases the size of the button */
+    font-size: 1rem; /* Adjust the font size as needed */
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #4CAF50; /* Example: a green background */
+    color: white; /* Text color */
+}
+
+
+/* Container for the loading dots */
+#loadingAnimation {
+    display: flex; /* Use flexbox to align the children */
+    justify-content: center; /* Center the dots horizontally */
+    align-items: center; /* Center the dots vertically */
+    position: fixed; /* Position the animation fixed within the viewport */
+    top: 50%; /* Position the container in the middle of the viewport vertically */
+    left: 50%; /* Position the container in the middle of the viewport horizontally */
+    transform: translate(-50%, -50%); /* Offset the container by half its size for true centering */
+    z-index: 100; /* Ensure the animation is above other content */
+}
+
+.dot {
+    height: 15px;
+    width: 15px;
+    margin: 0 5px;
+    background-color: #333; /* Dot color */
+    border-radius: 50%; /* Make the dots circular */
+    display: inline-block;
+    animation: dotFade 1.4s infinite ease-in-out both; /* Animation for fading effect */
+}
+
+.dot:nth-child(1) { animation-delay: -0.32s; }
+.dot:nth-child(2) { animation-delay: -0.16s; }
+
+@keyframes dotFade {
+    0%, 80%, 100% { opacity: 0; }
+    40% { opacity: 1; }
+}
+
+#contentContainer {
+    display: flex; /* Enable flexbox */
+    flex-direction: column; /* Stack children vertically */
+    align-items: center; /* Center children horizontally */
+    width: 75%; /* Set the width of the container to 75% of the viewport width */
+    max-width: 100%; /* Ensure the container does not exceed the viewport width */
+    margin: auto; /* Center the container within its parent */
+}
+
+#generatedImage {
+    max-width: 100%; /* Allow the image to scale within the container */
+    max-height: 75vh; /* Limit the image height to 75% of the viewport height */
+    display: none; /* Initially hidden */
+}
+
+#imageDescription {
+    width: 100%; /* Make the text area take up the full width of the container */
+    background-color: #fbd1a2;
+    border: 1px solid #e8e8e8;
+    font-size: 24px; /* Adjust the font size as needed */
+    padding: 10px; /* Padding inside the textarea */
+    margin-top: 20px; /* Space between the image and the text area */
+    resize: vertical; /* Allow only vertical resizing */
+    display: none; /* Initially hidden */
+}
+

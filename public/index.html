@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Uqbar Whispers</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+   
+    <!-- Webcam and Capture Button Container -->
+    <div id="webcamContainer">
+        <video id="video" autoplay></video>
+        <button id="capture">Capture</button>
+    </div>
+
+    <!-- Canvas for Processing (Hidden) -->
+    <canvas id="canvas" width="640" height="480" style="display:none;"></canvas>
+    
+    <!-- Container for the Generated Image (Initially Hidden) -->
+    <!-- <img id="generatedImage" alt="Generated Image" style="display:none;"> -->
+
+    <div id="contentContainer">
+        <img id="generatedImage" alt="Generated Image" style="display:none;">
+        <textarea id="imageDescription" readonly style="display:none;"></textarea>
+    </div>
+    
+    
+    <!-- Description Text Area (Initially Hidden) -->
+    <textarea id="imageDescription" readonly style="display:none;"></textarea>
+
+    <!-- Loading Animation (Initially Hidden) -->
+    <div id="loadingAnimation" style="display: none;">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+    </div>
+
+    <!-- Link to the main.js script -->
+    <script src="js/main.js"></script>
+</body>
+</html>
