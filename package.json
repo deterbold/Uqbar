@@ -1,4 +1,12 @@
 {
+  "name": "@uqbar-project/uqbar",
+  "version": "1.0.0",
+  "description": "The future of images",
+  "main": "app.js",
+  "author": "Ridiculous Software",
+  "engines": {
+    "node": "18.x"
+  },
   "dependencies": {
     "dotenv": "^16.4.5",
     "express": "^4.18.2",
