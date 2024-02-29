@@ -15,12 +15,12 @@
 
     <!-- Canvas for Processing (Hidden) -->
     <canvas id="canvas" width="640" height="480" style="display:none;"></canvas>
-    
-    <!-- Container for the Generated Image (Initially Hidden) -->
-    <!-- <img id="generatedImage" alt="Generated Image" style="display:none;"> -->
 
     <div id="contentContainer">
-        <img id="generatedImage" alt="Generated Image" style="display:none;">
+        <div id="imageImpactContainer">
+            <textarea id="environmentalImpact" readonly style="display:none;"></textarea>
+            <img id="generatedImage" alt="Generated Image" style="display:none;">
+        </div>
         <textarea id="imageDescription" readonly style="display:none;"></textarea>
     </div>
     
@@ -28,12 +28,19 @@
     <!-- Description Text Area (Initially Hidden) -->
     <textarea id="imageDescription" readonly style="display:none;"></textarea>
 
+    <!-- New TextArea for Environmental Impact -->
+    <textarea id="environmentalImpact" readonly style="display:none;"></textarea>
+
     <!-- Loading Animation (Initially Hidden) -->
     <div id="loadingAnimation" style="display: none;">
         <span class="dot"></span>
         <span class="dot"></span>
         <span class="dot"></span>
     </div>
+
+    <footer id="pageFooter">
+        <div id="sourcesElement"> <a href="https://arxiv.org/pdf/2304.03271.pdf" target="_blank">GPT Water Usage Source</a> || <a href="https://mlco2.github.io/impact/#compute" target="_blank">GPT CO2 Usage Source</a></div>
+    </footer>
 
     <!-- Link to the main.js script -->
     <script src="js/main.js"></script>

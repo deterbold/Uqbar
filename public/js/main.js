@@ -31,21 +31,40 @@ document.addEventListener("DOMContentLoaded", function () {
     textArea.style.height = textArea.scrollHeight + "px"; // Set the height to fit the content
   }
 
+  function getRandomNumber(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  function getRandomFloat(min, max, decimalPlaces) {
+    const randomNumber = Math.random() * (max - min) + min;
+    return randomNumber.toFixed(decimalPlaces);
+  }
+
   function displayImageAndDescription(imageUrl, description) {
     const imageElement = document.getElementById("generatedImage");
     const descriptionElement = document.getElementById("imageDescription");
+    const impactElement = document.getElementById("environmentalImpact");
+    const footerElement = document.getElementById("pageFooter");
 
     if (imageElement) {
       imageElement.src = imageUrl;
       imageElement.onload = function () {
         // Ensure the image is loaded before displaying and setting widths
         imageElement.style.display = "block"; // Show the image
-
+        footerElement.style.display = "block";
         // Set the description textarea width to match the image width
         if (descriptionElement) {
           descriptionElement.value = description; // Set the description text
           descriptionElement.style.display = "block"; // Show the textarea
           adjustTextAreaHeight(descriptionElement); // Adjust the height if you have this function
+        }
+
+        if (impactElement) {
+          const randomWaterUsage = getRandomNumber(10, 50);
+          const randomCO2 = getRandomFloat(4.0, 6.0, 2);
+          impactElement.style.display = "block";
+          impactElement.value = `For this interaction, ChatGPT has used approximately ${randomWaterUsage} ml of water, and released approximately ${randomCO2}g of CO2.`;
+          adjustTextAreaHeight(impactElement); // Adjust the height if you have this function
         }
       };
     }

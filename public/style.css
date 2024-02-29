@@ -90,3 +90,37 @@ body {
     display: none; /* Initially hidden */
 }
 
+/* ------------- */
+#imageImpactContainer {
+    display: flex; /* Enable flexbox for horizontal layout */
+    flex-direction: row; /* Place children side by side */
+    align-items: center; /* Vertically center children */
+    width: 100%; /* Take up the full width of the parent container */
+    margin-bottom: 20px; /* Space between this container and the imageDescription */
+}
+
+#environmentalImpact {
+    width: 20%; /* Adjust based on your layout preference */
+    background-color: #fbd1a2;
+    border: 1px solid #fbd1a2;
+    font-size: 24px; /* Adjust the font size as needed */
+    padding: 10px;
+    margin-right: 10px; /* Space between the textarea and the image */
+    resize: vertical;
+    display: none; /* Initially hidden */
+}
+
+footer#pageFooter {
+    width: 100%;
+    background-color: #fbd1a2; /* Match the page's background color or choose a different one for the footer */
+    padding: 20px 10px; /* Add some padding for spacing */
+    box-sizing: border-box; /* Include padding in the element's total width and height */
+    text-align: center; /* Center the text inside the footer */
+    border-top: 1px solid #e8e8e8; /* Optional: add a border on top for visual separation */
+    display: none; /* Initially hidden */
+}
+
+#sourcesElement {
+    font-size: 16px; /* Adjust the font size as needed */
+    /* Additional styling as needed */
+}
