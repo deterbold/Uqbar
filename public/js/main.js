@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", function () {
           const randomWaterUsage = getRandomNumber(10, 50);
           const randomCO2 = getRandomFloat(4.0, 6.0, 2);
           impactElement.style.display = "block";
-          impactElement.value = `For this interaction, ChatGPT has used approximately ${randomWaterUsage} ml of water, and released approximately ${randomCO2}g of CO2.`;
+          impactElement.value = `For this interaction, ChatGPT has used approximately ${randomWaterUsage} ml of water (about half a espresso), and released approximately ${randomCO2}g of CO2 (a regular Google search uses around 0,2 g.).`;
           adjustTextAreaHeight(impactElement); // Adjust the height if you have this function
         }
       };
