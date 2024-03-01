@@ -8,26 +8,47 @@ document.addEventListener("DOMContentLoaded", function () {
   const captureButton = document.getElementById("capture");
   let stream = null; // Variable to hold the stream reference
   const mobileOnlyButton = document.getElementById("mobileOnlyButton");
-  //mobileOnlyButton.style.display = "block";
+  let facingMode = "user";
+
   if (isMobileDevice()) {
     // If it's a mobile device, show the button
     mobileOnlyButton.style.display = "block"; // Or "inline-block", depending on your layout needs
+    let facingMode = "user"; // Start with the front-facing camera
   }
-
-  let facingMode = "user"; // Start with the front-facing camera
 
   // Access the webcam
-  if (navigator.mediaDevices.getUserMedia) {
-    navigator.mediaDevices
-      .getUserMedia({ video: true })
-      .then(function (mediaStream) {
-        stream = mediaStream; // Store the stream reference
-        video.srcObject = mediaStream;
-      })
-      .catch(function (error) {
-        console.log("Error accessing the webcam", error);
-      });
+  // if (navigator.mediaDevices.getUserMedia) {
+  //   navigator.mediaDevices
+  //     .getUserMedia({ video: true })
+  //     .then(function (mediaStream) {
+  //       stream = mediaStream; // Store the stream reference
+  //       video.srcObject = mediaStream;
+  //     })
+  //     .catch(function (error) {
+  //       console.log("Error accessing the webcam", error);
+  //     });
+  // }
+
+  // Access the webcam with the given facing mode
+  function getCameraStream() {
+    if (navigator.mediaDevices.getUserMedia) {
+      const constraints = {
+        video: { facingMode: facingMode },
+      };
+
+      navigator.mediaDevices
+        .getUserMedia(constraints)
+        .then(function (mediaStream) {
+          stream = mediaStream; // Store the stream reference
+          video.srcObject = mediaStream;
+          video.play(); // Ensure the video plays
+        })
+        .catch(function (error) {
+          console.log("Error accessing the webcam", error);
+        });
+    }
   }
+  getCameraStream(); // Access the webcam
 
   // Function to stop the camera
   function stopCamera() {
@@ -118,41 +139,17 @@ document.addEventListener("DOMContentLoaded", function () {
     }, "image/jpeg");
   });
 
+  mobileOnlyButton.addEventListener("click", function () {
+    facingMode = facingMode === "user" ? "environment" : "user";
+    getCameraStream(); // Re-fetch the camera stream with the new facing mode
+  });
+
   // Function to detect a mobile device
   function isMobileDevice() {
+    console.log("mobile device");
     const userAgent = navigator.userAgent || navigator.vendor || window.opera;
     return /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(
       userAgent
     );
   }
-
-  // Access the webcam with the given facing mode
-  function getCameraStream() {
-    if (navigator.mediaDevices.getUserMedia) {
-      const constraints = {
-        video: { facingMode: facingMode },
-      };
-
-      navigator.mediaDevices
-        .getUserMedia(constraints)
-        .then(function (mediaStream) {
-          stream = mediaStream; // Store the stream reference
-          video.srcObject = mediaStream;
-          video.style.display = "block"; // Ensure the video is shown when the stream is obtained
-        })
-        .catch(function (error) {
-          console.log("Error accessing the webcam", error);
-        });
-    }
-
-    // Toggle camera between front and rear on mobileOnlyButton click
-    mobileOnlyButton.addEventListener("click", function () {
-      facingMode = facingMode === "user" ? "environment" : "user";
-      getCameraStream(); // Re-fetch the camera stream with the new facing mode
-    });
-
-    getCameraStream(); // Initialize the camera stream
-  }
-
-  // Functions to flip the camera on Mobile
 });
