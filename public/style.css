@@ -6,163 +6,97 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    min-height: 100vh;
     background-color: #fbd1a2; /* Warm background color */
 }
 
 #webcamContainer {
     display: flex;
-    flex-direction: column; /* Stack the video and button vertically */
-    align-items: center; /* Center-align children horizontally */
-    margin-top: 20px; /* Optional: Adds some space from the top of the page */
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
 }
 
 #video {
-    max-width: 90%; /* Adjust as needed to control the size of the video */
-    border-radius: 8px; /* Optional: Adds rounded corners to the video */
+    width: 100%; /* Make video responsive */
+    border-radius: 8px;
 }
 
 #webcamContainer button {
-    padding: 10px 20px; /* Adjust padding for buttons */
-    font-size: 16px; /* Adjust font size for buttons */
-    cursor: pointer; /* Change cursor to pointer on hover */
-    border: none; /* Remove default border */
-    border-radius: 5px; /* Optional: rounded corners for buttons */
-    background-color: #4CAF50; /* Example: green background for buttons */
-    color: white; /* Text color for buttons */
-    display: inline-block; /* Display buttons inline */
-}
-
-/* Flex container for buttons to align them horizontally */
-#buttonContainer {
-    display: flex; /* Enable flexbox for horizontal layout */
-    justify-content: center; /* Center the buttons horizontally */
-    width: 100%; /* Take up the full width of the parent container */
-    gap: 10px; /* Space between the buttons */
-}
-
-#mobileOnlyButton {
-    /* position: absolute; */
-    top: 0; /* Align the top edge of the button with the top edge of the container */
-    right: 0; /* Align the right edge of the button with the right edge of the container */
-    display: none; /* Initially hidden, shown via JavaScript for mobile devices */
-    background: none; /* Remove default background */
-    border: none; /* Remove default border */
-    color: #FFF; /* Icon color, adjust as needed */
-    font-size: 24px; /* Icon size, adjust as needed */
-    cursor: pointer; /* Change cursor to pointer to indicate it's clickable */
-    /* Additional button styling as needed */
-    margin-top: 10px; /* Space between the button and the top of the container */
-}
-
-#capture {
-    margin-top: 20px; /* Space between the video and the button */
-    padding: 10px 20px; /* Increases the size of the button */
-    font-size: 1rem; /* Adjust the font size as needed */
+    padding: 8px 16px;
+    font-size: 14px; /* Slightly smaller font size for mobile */
     cursor: pointer;
     border: none;
     border-radius: 5px;
-    background-color: #4CAF50; /* Example: a green background */
-    color: white; /* Text color */
+    background-color: #4CAF50;
+    color: white;
+    margin-top: 10px; /* Reduce space between the video and the button on mobile */
 }
 
-
-/* Container for the loading dots */
 #loadingAnimation {
-    display: flex; /* Use flexbox to align the children */
-    justify-content: center; /* Center the dots horizontally */
-    align-items: center; /* Center the dots vertically */
-    position: fixed; /* Position the animation fixed within the viewport */
-    top: 50%; /* Position the container in the middle of the viewport vertically */
-    left: 50%; /* Position the container in the middle of the viewport horizontally */
-    transform: translate(-50%, -50%); /* Offset the container by half its size for true centering */
-    z-index: 100; /* Ensure the animation is above other content */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
 }
 
 .dot {
     height: 15px;
     width: 15px;
     margin: 0 5px;
-    background-color: #333; /* Dot color */
-    border-radius: 50%; /* Make the dots circular */
+    background-color: #333;
+    border-radius: 50%;
     display: inline-block;
-    animation: dotFade 1.4s infinite ease-in-out both; /* Animation for fading effect */
+    animation: dotFade 1.4s infinite ease-in-out both;
 }
 
-.dot:nth-child(1) { animation-delay: -0.32s; }
-.dot:nth-child(2) { animation-delay: -0.16s; }
+#contentContainer, #imageImpactContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%; /* Adjust width for mobile screens */
+    margin: auto;
+}
+
+#generatedImage, #imageDescription, #environmentalImpact, footer#pageFooter, #sourcesElement {
+    width: 100%; /* Full width on mobile for better readability */
+    margin-top: 10px;
+    background-color: #fbd1a2;
+    border: 1px solid #e8e8e8;
+    padding: 10px;
+    font-size: 16px; /* Adjust font size for better readability on mobile */
+    resize: vertical;
+    display: none;
+}
+
+@media (min-width: 768px) { /* Adjustments for tablets and larger screens */
+    #webcamContainer button, #generatedImage, #imageDescription, #environmentalImpact {
+        padding: 10px 20px;
+        font-size: 18px; /* Larger font size for readability */
+        margin-top: 20px; /* Increase spacing */
+    }
+
+    #contentContainer, #imageImpactContainer {
+        flex-direction: row; /* Align elements side by side on larger screens */
+        justify-content: center;
+        gap: 20px; /* Space between elements */
+        width: 75%; /* Adjust container width for larger screens */
+    }
+
+    #environmentalImpact {
+        width: 30%; /* Adjust the width of environmental impact section */
+    }
+
+    #generatedImage, #imageDescription {
+        width: 60%; /* Adjust the width for larger screens */
+    }
+}
 
 @keyframes dotFade {
     0%, 80%, 100% { opacity: 0; }
     40% { opacity: 1; }
 }
-
-#contentContainer {
-    display: flex; /* Enable flexbox */
-    flex-direction: column; /* Stack children vertically */
-    align-items: center; /* Center children horizontally */
-    width: 75%; /* Set the width of the container to 75% of the viewport width */
-    max-width: 100%; /* Ensure the container does not exceed the viewport width */
-    margin: auto; /* Center the container within its parent */
-}
-
-#generatedImage {
-    max-width: 100%; /* Allow the image to scale within the container */
-    max-height: 75vh; /* Limit the image height to 75% of the viewport height */
-    display: none; /* Initially hidden */
-}
-
-#imageDescription {
-    /* font-family: 'Prata'; */
-    width: 100%; /* Make the text area take up the full width of the container */
-    background-color: #fbd1a2;
-    border: 1px solid #e8e8e8;
-    font-size: 24px; /* Adjust the font size as needed */
-    padding: 10px; /* Padding inside the textarea */
-    margin-top: 20px; /* Space between the image and the text area */
-    resize: vertical; /* Allow only vertical resizing */
-    display: none; /* Initially hidden */
-}
-
-/* ------------- */
-#imageImpactContainer {
-    display: flex; /* Enable flexbox for horizontal layout */
-    flex-direction: row; /* Place children side by side */
-    align-items: center; /* Vertically center children */
-    width: 100%; /* Take up the full width of the parent container */
-    margin-bottom: 20px; /* Space between this container and the imageDescription */
-}
-
-#environmentalImpact {
-    font-family: 'Prata';
-    width: 40%; /* Adjust based on your layout preference */
-    background-color: #fbd1a2;
-    border: 1px solid #fbd1a2;
-    font-size: 16px; /* Adjust the font size as needed */
-    padding: 20px;
-    margin-right: 10px; /* Space between the textarea and the image */
-    resize: vertical;
-    display: none; /* Initially hidden */
-}
-
-footer#pageFooter {
-    width: 100%;
-    background-color: #fbd1a2; /* Match the page's background color or choose a different one for the footer */
-    padding: 20px 10px; /* Add some padding for spacing */
-    box-sizing: border-box; /* Include padding in the element's total width and height */
-    text-align: center; /* Center the text inside the footer */
-    border-top: 1px solid #e8e8e8; /* Optional: add a border on top for visual separation */
-    display: none; /* Initially hidden */
-}
-
-#sourcesElement {
-    font-size: 16px; /* Adjust the font size as needed */
-    /* Additional styling as needed */
-}
-
-.prata-regular {
-    font-family: "Prata", serif;
-    font-weight: 400;
-    font-style: normal;
-  }
-  
