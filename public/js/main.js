@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const captureButton = document.getElementById("capture");
   let stream = null; // Variable to hold the stream reference
   const mobileOnlyButton = document.getElementById("mobileOnlyButton");
-  let facingMode = "user";
+  //let facingMode = "user";
 
   // Access the webcam
   if (navigator.mediaDevices.getUserMedia) {
