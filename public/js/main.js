@@ -8,41 +8,41 @@ document.addEventListener("DOMContentLoaded", function () {
   const captureButton = document.getElementById("capture");
   let stream = null; // Variable to hold the stream reference
   const mobileOnlyButton = document.getElementById("mobileOnlyButton");
-  //let facingMode = "user";
+  let facingMode = "user";
 
   // Access the webcam
-  if (navigator.mediaDevices.getUserMedia) {
-    navigator.mediaDevices
-      .getUserMedia({ video: true })
-      .then(function (mediaStream) {
-        stream = mediaStream; // Store the stream reference
-        video.srcObject = mediaStream;
-      })
-      .catch(function (error) {
-        console.log("Error accessing the webcam", error);
-      });
-  }
+  // if (navigator.mediaDevices.getUserMedia) {
+  //   navigator.mediaDevices
+  //     .getUserMedia({ video: true })
+  //     .then(function (mediaStream) {
+  //       stream = mediaStream; // Store the stream reference
+  //       video.srcObject = mediaStream;
+  //     })
+  //     .catch(function (error) {
+  //       console.log("Error accessing the webcam", error);
+  //     });
+  // }
 
   // Access the webcam with the given facing mode
-  // function getCameraStream() {
-  //   if (navigator.mediaDevices.getUserMedia) {
-  //     const constraints = {
-  //       video: { facingMode: facingMode },
-  //     };
+  function getCameraStream() {
+    if (navigator.mediaDevices.getUserMedia) {
+      const constraints = {
+        video: { facingMode: facingMode },
+      };
 
-  //     navigator.mediaDevices
-  //       .getUserMedia(constraints)
-  //       .then(function (mediaStream) {
-  //         stream = mediaStream; // Store the stream reference
-  //         video.srcObject = mediaStream;
-  //         //video.play(); // Ensure the video plays
-  //       })
-  //       .catch(function (error) {
-  //         console.log("Error accessing the webcam", error);
-  //       });
-  //   }
-  // }
-  // getCameraStream(); // Access the webcam
+      navigator.mediaDevices
+        .getUserMedia(constraints)
+        .then(function (mediaStream) {
+          stream = mediaStream; // Store the stream reference
+          video.srcObject = mediaStream;
+          //video.play(); // Ensure the video plays
+        })
+        .catch(function (error) {
+          console.log("Error accessing the webcam", error);
+        });
+    }
+  }
+  getCameraStream(); // Access the webcam
 
   // Function to stop the camera
   function stopCamera() {
@@ -133,23 +133,23 @@ document.addEventListener("DOMContentLoaded", function () {
     }, "image/jpeg");
   });
 
-  // mobileOnlyButton.addEventListener("click", function () {
-  //   facingMode = facingMode === "user" ? "environment" : "user";
-  //   getCameraStream(); // Re-fetch the camera stream with the new facing mode
-  // });
+  mobileOnlyButton.addEventListener("click", function () {
+    facingMode = facingMode === "user" ? "environment" : "user";
+    getCameraStream(); // Re-fetch the camera stream with the new facing mode
+  });
 
   // Function to detect a mobile device
-  // function isMobileDevice() {
-  //   console.log("testing Mobile device");
-  //   const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-  //   return /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(
-  //     userAgent
-  //   );
-  //   console.log(userAgent);
-  // }
-  // if (isMobileDevice()) {
-  //   console.log("mobile device");
-  //   // If it's a mobile device, show the button
-  //   mobileOnlyButton.style.display = "block"; // Or "inline-block", depending on your layout needs
-  // }
+  function isMobileDevice() {
+    console.log("testing Mobile device");
+    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    return /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(
+      userAgent
+    );
+    console.log(userAgent);
+  }
+  if (isMobileDevice()) {
+    console.log("mobile device");
+    // If it's a mobile device, show the button
+    mobileOnlyButton.style.display = "block"; // Or "inline-block", depending on your layout needs
+  }
 });
