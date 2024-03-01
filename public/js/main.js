@@ -8,10 +8,13 @@ document.addEventListener("DOMContentLoaded", function () {
   const captureButton = document.getElementById("capture");
   let stream = null; // Variable to hold the stream reference
   const mobileOnlyButton = document.getElementById("mobileOnlyButton");
+  //mobileOnlyButton.style.display = "block";
   if (isMobileDevice()) {
     // If it's a mobile device, show the button
     mobileOnlyButton.style.display = "block"; // Or "inline-block", depending on your layout needs
   }
+
+  let facingMode = "user"; // Start with the front-facing camera
 
   // Access the webcam
   if (navigator.mediaDevices.getUserMedia) {
@@ -123,26 +126,33 @@ document.addEventListener("DOMContentLoaded", function () {
     );
   }
 
-  // Functionality to flip the camera
-  mobileOnlyButton.addEventListener("click", function () {
-    // Code to flip the camera
-    if (facingMode == "user") {
-      facingMode = "environment";
-    } else {
-      facingMode = "user";
+  // Access the webcam with the given facing mode
+  function getCameraStream() {
+    if (navigator.mediaDevices.getUserMedia) {
+      const constraints = {
+        video: { facingMode: facingMode },
+      };
+
+      navigator.mediaDevices
+        .getUserMedia(constraints)
+        .then(function (mediaStream) {
+          stream = mediaStream; // Store the stream reference
+          video.srcObject = mediaStream;
+          video.style.display = "block"; // Ensure the video is shown when the stream is obtained
+        })
+        .catch(function (error) {
+          console.log("Error accessing the webcam", error);
+        });
     }
 
-    constraints = {
-      audio: false,
-      video: {
-        facingMode: facingMode,
-      },
-    };
+    // Toggle camera between front and rear on mobileOnlyButton click
+    mobileOnlyButton.addEventListener("click", function () {
+      facingMode = facingMode === "user" ? "environment" : "user";
+      getCameraStream(); // Re-fetch the camera stream with the new facing mode
+    });
 
-    navigator.mediaDevices
-      .getUserMedia(constraints)
-      .then(function success(stream) {
-        video.srcObject = stream;
-      });
-  });
+    getCameraStream(); // Initialize the camera stream
+  }
+
+  // Functions to flip the camera on Mobile
 });

@@ -21,8 +21,28 @@ body {
     max-width: 90%; /* Adjust as needed to control the size of the video */
     border-radius: 8px; /* Optional: Adds rounded corners to the video */
 }
+
+#webcamContainer button {
+    padding: 10px 20px; /* Adjust padding for buttons */
+    font-size: 16px; /* Adjust font size for buttons */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Optional: rounded corners for buttons */
+    background-color: #4CAF50; /* Example: green background for buttons */
+    color: white; /* Text color for buttons */
+    display: inline-block; /* Display buttons inline */
+}
+
+/* Flex container for buttons to align them horizontally */
+#buttonContainer {
+    display: flex; /* Enable flexbox for horizontal layout */
+    justify-content: center; /* Center the buttons horizontally */
+    width: 100%; /* Take up the full width of the parent container */
+    gap: 10px; /* Space between the buttons */
+}
+
 #mobileOnlyButton {
-    position: absolute;
+    /* position: absolute; */
     top: 0; /* Align the top edge of the button with the top edge of the container */
     right: 0; /* Align the right edge of the button with the right edge of the container */
     display: none; /* Initially hidden, shown via JavaScript for mobile devices */
@@ -32,6 +52,7 @@ body {
     font-size: 24px; /* Icon size, adjust as needed */
     cursor: pointer; /* Change cursor to pointer to indicate it's clickable */
     /* Additional button styling as needed */
+    margin-top: 10px; /* Space between the button and the top of the container */
 }
 
 #capture {
@@ -92,7 +113,7 @@ body {
 }
 
 #imageDescription {
-    font-family: 'Prata';
+    /* font-family: 'Prata'; */
     width: 100%; /* Make the text area take up the full width of the container */
     background-color: #fbd1a2;
     border: 1px solid #e8e8e8;
@@ -114,7 +135,7 @@ body {
 
 #environmentalImpact {
     font-family: 'Prata';
-    width: 100%; /* Adjust based on your layout preference */
+    width: 40%; /* Adjust based on your layout preference */
     background-color: #fbd1a2;
     border: 1px solid #fbd1a2;
     font-size: 16px; /* Adjust the font size as needed */
