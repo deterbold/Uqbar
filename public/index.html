@@ -2,8 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Uqbar Whispers</title>
+    <title>Echo</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prata&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 </head>
 <body>
    
@@ -11,6 +15,9 @@
     <div id="webcamContainer">
         <video id="video" autoplay></video>
         <button id="capture">Capture</button>
+        <button id="mobileOnlyButton" style="display: none;">
+            <i class="fas fa-sync-alt"></i>
+        </button>
     </div>
 
     <!-- Canvas for Processing (Hidden) -->

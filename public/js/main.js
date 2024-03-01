@@ -1,9 +1,17 @@
 document.addEventListener("DOMContentLoaded", function () {
   const video = document.getElementById("video");
+  video.setAttribute("autoplay", "");
+  video.setAttribute("muted", "");
+  video.setAttribute("playsinline", ""); // Required to work on iOS Safari
   const canvas = document.getElementById("canvas");
   const context = canvas.getContext("2d");
   const captureButton = document.getElementById("capture");
   let stream = null; // Variable to hold the stream reference
+  const mobileOnlyButton = document.getElementById("mobileOnlyButton");
+  if (isMobileDevice()) {
+    // If it's a mobile device, show the button
+    mobileOnlyButton.style.display = "block"; // Or "inline-block", depending on your layout needs
+  }
 
   // Access the webcam
   if (navigator.mediaDevices.getUserMedia) {
@@ -76,6 +84,8 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("loadingAnimation").style.display = "flex";
 
     captureButton.style.display = "none";
+    mobileOnlyButton.style.display = "none";
+
     video.style.display = "none"; // Hide the video element
 
     context.drawImage(video, 0, 0, canvas.width, canvas.height);
@@ -103,5 +113,36 @@ document.addEventListener("DOMContentLoaded", function () {
           document.getElementById("loadingAnimation").style.display = "none";
         });
     }, "image/jpeg");
+  });
+
+  // Function to detect a mobile device
+  function isMobileDevice() {
+    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    return /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(
+      userAgent
+    );
+  }
+
+  // Functionality to flip the camera
+  mobileOnlyButton.addEventListener("click", function () {
+    // Code to flip the camera
+    if (facingMode == "user") {
+      facingMode = "environment";
+    } else {
+      facingMode = "user";
+    }
+
+    constraints = {
+      audio: false,
+      video: {
+        facingMode: facingMode,
+      },
+    };
+
+    navigator.mediaDevices
+      .getUserMedia(constraints)
+      .then(function success(stream) {
+        video.srcObject = stream;
+      });
   });
 });

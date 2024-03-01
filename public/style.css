@@ -21,6 +21,18 @@ body {
     max-width: 90%; /* Adjust as needed to control the size of the video */
     border-radius: 8px; /* Optional: Adds rounded corners to the video */
 }
+#mobileOnlyButton {
+    position: absolute;
+    top: 0; /* Align the top edge of the button with the top edge of the container */
+    right: 0; /* Align the right edge of the button with the right edge of the container */
+    display: none; /* Initially hidden, shown via JavaScript for mobile devices */
+    background: none; /* Remove default background */
+    border: none; /* Remove default border */
+    color: #FFF; /* Icon color, adjust as needed */
+    font-size: 24px; /* Icon size, adjust as needed */
+    cursor: pointer; /* Change cursor to pointer to indicate it's clickable */
+    /* Additional button styling as needed */
+}
 
 #capture {
     margin-top: 20px; /* Space between the video and the button */
@@ -80,6 +92,7 @@ body {
 }
 
 #imageDescription {
+    font-family: 'Prata';
     width: 100%; /* Make the text area take up the full width of the container */
     background-color: #fbd1a2;
     border: 1px solid #e8e8e8;
@@ -100,11 +113,12 @@ body {
 }
 
 #environmentalImpact {
-    width: 20%; /* Adjust based on your layout preference */
+    font-family: 'Prata';
+    width: 100%; /* Adjust based on your layout preference */
     background-color: #fbd1a2;
     border: 1px solid #fbd1a2;
     font-size: 16px; /* Adjust the font size as needed */
-    padding: 10px;
+    padding: 20px;
     margin-right: 10px; /* Space between the textarea and the image */
     resize: vertical;
     display: none; /* Initially hidden */
@@ -124,3 +138,10 @@ footer#pageFooter {
     font-size: 16px; /* Adjust the font size as needed */
     /* Additional styling as needed */
 }
+
+.prata-regular {
+    font-family: "Prata", serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
