@@ -146,9 +146,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Function to detect a mobile device
   function isMobileDevice() {
+    console.log("testing Mobile device");
     const userAgent = navigator.userAgent || navigator.vendor || window.opera;
     return /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(
       userAgent
     );
+    console.log(userAgent);
   }
 });
