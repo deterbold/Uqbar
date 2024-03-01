@@ -11,9 +11,9 @@ document.addEventListener("DOMContentLoaded", function () {
   let facingMode = "user";
 
   if (isMobileDevice()) {
+    console.log("mobile device");
     // If it's a mobile device, show the button
     mobileOnlyButton.style.display = "block"; // Or "inline-block", depending on your layout needs
-    let facingMode = "user"; // Start with the front-facing camera
   }
 
   // Access the webcam
@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function () {
         .then(function (mediaStream) {
           stream = mediaStream; // Store the stream reference
           video.srcObject = mediaStream;
-          video.play(); // Ensure the video plays
+          //video.play(); // Ensure the video plays
         })
         .catch(function (error) {
           console.log("Error accessing the webcam", error);
