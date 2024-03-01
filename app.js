@@ -44,7 +44,7 @@ app.post("/upload", upload.single("image"), async (req, res) => {
           ],
         },
       ],
-      max_tokens: 400,
+      max_tokens: 300,
     });
     console.log(response.choices[0].message.content);
     const description = response.choices[0].message.content;
