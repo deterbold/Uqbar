@@ -10,45 +10,39 @@ document.addEventListener("DOMContentLoaded", function () {
   const mobileOnlyButton = document.getElementById("mobileOnlyButton");
   let facingMode = "user";
 
-  if (isMobileDevice()) {
-    console.log("mobile device");
-    // If it's a mobile device, show the button
-    mobileOnlyButton.style.display = "block"; // Or "inline-block", depending on your layout needs
-  }
-
   // Access the webcam
-  // if (navigator.mediaDevices.getUserMedia) {
-  //   navigator.mediaDevices
-  //     .getUserMedia({ video: true })
-  //     .then(function (mediaStream) {
-  //       stream = mediaStream; // Store the stream reference
-  //       video.srcObject = mediaStream;
-  //     })
-  //     .catch(function (error) {
-  //       console.log("Error accessing the webcam", error);
-  //     });
-  // }
+  if (navigator.mediaDevices.getUserMedia) {
+    navigator.mediaDevices
+      .getUserMedia({ video: true })
+      .then(function (mediaStream) {
+        stream = mediaStream; // Store the stream reference
+        video.srcObject = mediaStream;
+      })
+      .catch(function (error) {
+        console.log("Error accessing the webcam", error);
+      });
+  }
 
   // Access the webcam with the given facing mode
-  function getCameraStream() {
-    if (navigator.mediaDevices.getUserMedia) {
-      const constraints = {
-        video: { facingMode: facingMode },
-      };
+  // function getCameraStream() {
+  //   if (navigator.mediaDevices.getUserMedia) {
+  //     const constraints = {
+  //       video: { facingMode: facingMode },
+  //     };
 
-      navigator.mediaDevices
-        .getUserMedia(constraints)
-        .then(function (mediaStream) {
-          stream = mediaStream; // Store the stream reference
-          video.srcObject = mediaStream;
-          //video.play(); // Ensure the video plays
-        })
-        .catch(function (error) {
-          console.log("Error accessing the webcam", error);
-        });
-    }
-  }
-  getCameraStream(); // Access the webcam
+  //     navigator.mediaDevices
+  //       .getUserMedia(constraints)
+  //       .then(function (mediaStream) {
+  //         stream = mediaStream; // Store the stream reference
+  //         video.srcObject = mediaStream;
+  //         //video.play(); // Ensure the video plays
+  //       })
+  //       .catch(function (error) {
+  //         console.log("Error accessing the webcam", error);
+  //       });
+  //   }
+  // }
+  // getCameraStream(); // Access the webcam
 
   // Function to stop the camera
   function stopCamera() {
@@ -152,5 +146,10 @@ document.addEventListener("DOMContentLoaded", function () {
       userAgent
     );
     console.log(userAgent);
+  }
+  if (isMobileDevice()) {
+    console.log("mobile device");
+    // If it's a mobile device, show the button
+    mobileOnlyButton.style.display = "block"; // Or "inline-block", depending on your layout needs
   }
 });
