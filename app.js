@@ -46,6 +46,7 @@ app.post("/upload", upload.single("image"), async (req, res) => {
       ],
       max_tokens: 300,
     });
+    //console.log(response);
     console.log(response.choices[0].message.content);
     const description = response.choices[0].message.content;
 
@@ -57,7 +58,7 @@ app.post("/upload", upload.single("image"), async (req, res) => {
     });
 
     // Extract the URL of the generated image
-
+    //console.log(imageResponse);
     console.log(imageResponse.data[0].url);
     const imageUrl = imageResponse.data[0].url;
     // Send the URL of the generated image and the description back to the client
