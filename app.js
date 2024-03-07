@@ -26,6 +26,12 @@ app.post("/upload", upload.single("image"), async (req, res) => {
   try {
     // Convert the uploaded image buffer to a Base64 string
     const base64Image = req.file.buffer.toString("base64");
+    const modelSelection = req.body.model; // Get the model selection from the request
+
+    // Set model and max_tokens based on the selection
+    const model = modelSelection === "dall-e-2" ? "dall-e-2" : "dall-e-3";
+    console.log(model);
+    const maxTokens = modelSelection === "dall-e-2" ? 200 : 300;
 
     // Prepare the payload for the OpenAI API
     const response = await openai.chat.completions.create({
@@ -44,14 +50,14 @@ app.post("/upload", upload.single("image"), async (req, res) => {
           ],
         },
       ],
-      max_tokens: 300,
+      max_tokens: maxTokens,
     });
     //console.log(response);
     console.log(response.choices[0].message.content);
     const description = response.choices[0].message.content;
 
     const imageResponse = await openai.images.generate({
-      model: "dall-e-3",
+      model: model,
       prompt: description,
       n: 1,
       size: "1024x1024",
