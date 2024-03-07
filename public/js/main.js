@@ -5,23 +5,13 @@ document.addEventListener("DOMContentLoaded", function () {
   video.setAttribute("playsinline", ""); // Required to work on iOS Safari
   const canvas = document.getElementById("canvas");
   const context = canvas.getContext("2d");
+  const toggleButton = document.getElementById("toggleButton");
+  toggleButton.textContent = "DALL·E 3";
+  toggleButton.classList.add("active");
   const captureButton = document.getElementById("capture");
   let stream = null; // Variable to hold the stream reference
   const mobileOnlyButton = document.getElementById("mobileOnlyButton");
   let facingMode = "user";
-
-  // Access the webcam
-  // if (navigator.mediaDevices.getUserMedia) {
-  //   navigator.mediaDevices
-  //     .getUserMedia({ video: true })
-  //     .then(function (mediaStream) {
-  //       stream = mediaStream; // Store the stream reference
-  //       video.srcObject = mediaStream;
-  //     })
-  //     .catch(function (error) {
-  //       console.log("Error accessing the webcam", error);
-  //     });
-  // }
 
   // Access the webcam with the given facing mode
   function getCameraStream() {
@@ -68,6 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function displayImageAndDescription(imageUrl, description) {
     const imageElement = document.getElementById("generatedImage");
+    const reloadButton = document.getElementById("reloadButton");
     const descriptionElement = document.getElementById("imageDescription");
     const impactElement = document.getElementById("environmentalImpact");
     const footerElement = document.getElementById("pageFooter");
@@ -77,6 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
       imageElement.onload = function () {
         // Ensure the image is loaded before displaying and setting widths
         imageElement.style.display = "block"; // Show the image
+        reloadButton.style.display = "block"; // Show the reload button when the image is displayed
         footerElement.style.display = "block";
         // Set the description textarea width to match the image width
         if (descriptionElement) {
@@ -93,14 +85,32 @@ document.addEventListener("DOMContentLoaded", function () {
           adjustTextAreaHeight(impactElement); // Adjust the height if you have this function
         }
       };
+      // Event listener for the reload button
+      reloadButton.addEventListener("click", function () {
+        // Reload the webpage
+        location.reload();
+      });
     }
   }
 
+  // Toggle button event listener
+  toggleButton.addEventListener("click", function () {
+    if (toggleButton.textContent.includes("2")) {
+      toggleButton.textContent = "DALL·E 3";
+      toggleButton.classList.add("active");
+      // Set the model to DALL·E 3
+    } else {
+      toggleButton.textContent = "DALL·E 2";
+      toggleButton.classList.remove("active");
+      // Set the model to DALL·E 2
+    }
+  });
   // Capture button event listener
   captureButton.addEventListener("click", function () {
+    stopCamera(); // Stop the camera before taking the picture
     // Show the loading animation
     document.getElementById("loadingAnimation").style.display = "flex";
-
+    document.getElementById("toggleContainer").style.display = "none";
     captureButton.style.display = "none";
     mobileOnlyButton.style.display = "none";
 
@@ -111,6 +121,10 @@ document.addEventListener("DOMContentLoaded", function () {
     canvas.toBlob(function (blob) {
       const formData = new FormData();
       formData.append("image", blob); // Append the image blob to the form data
+      formData.append(
+        "model",
+        toggleButton.textContent.includes("2") ? "dall-e-2" : "dall-e-3"
+      ); // Add the model selection based on the toggle button text
 
       // Send the image to the server
       fetch("/upload", {
