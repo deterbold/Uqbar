@@ -13,6 +13,9 @@ node_modules/
 # Build directory
 dist/
 
+# Data
+uploads/
+
 # Other common directories to consider ignoring
 # coverage/     # Directory used by test coverage tools
 # .cache/       # Cache directories like those used by Babel

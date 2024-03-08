@@ -74,6 +74,7 @@ app.post("/upload", upload.single("image"), async (req, res) => {
 
     // Extract the URL of the generated image
     console.log(imageResponse.data[0].revised_prompt);
+    const revisedPrompt = imageResponse.data[0].revised_prompt;
     console.log(imageResponse.data[0].url);
     const imageUrl = imageResponse.data[0].url;
 
@@ -93,10 +94,15 @@ app.post("/upload", upload.single("image"), async (req, res) => {
     const jsonData = {
       date: new Date().toLocaleDateString(),
       time: new Date().toLocaleTimeString(),
+      model: model,
       imageDescription: description, // Assuming this comes from your OpenAI API interaction
       generatedImageFilename: generatedImageFilename,
       webcamImageFilename: webcamImageFilename,
     };
+    // Include revisedPrompt in JSON data if it's not undefined
+    if (revisedPrompt !== undefined) {
+      jsonData.revisedPrompt = revisedPrompt;
+    }
     fs.writeFileSync(
       path.join(folderPath, "data.json"),
       JSON.stringify(jsonData, null, 2)
