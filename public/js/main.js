@@ -107,7 +107,6 @@ document.addEventListener("DOMContentLoaded", function () {
   });
   // Capture button event listener
   captureButton.addEventListener("click", function () {
-    stopCamera(); // Stop the camera before taking the picture
     // Show the loading animation
     document.getElementById("loadingAnimation").style.display = "flex";
     document.getElementById("toggleContainer").style.display = "none";
