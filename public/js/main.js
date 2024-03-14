@@ -56,9 +56,14 @@ document.addEventListener("DOMContentLoaded", function () {
     return randomNumber.toFixed(decimalPlaces);
   }
 
-  function displayImageAndDescription(imageUrl, description) {
+  function displayImageAndDescription(
+    imageUrl,
+    originalDescription,
+    revisedDescription
+  ) {
     const imageElement = document.getElementById("generatedImage");
     const reloadButton = document.getElementById("reloadButton");
+    const originalPromptElement = document.getElementById("originalPrompt");
     const descriptionElement = document.getElementById("imageDescription");
     const impactElement = document.getElementById("environmentalImpact");
     const footerElement = document.getElementById("pageFooter");
@@ -70,9 +75,16 @@ document.addEventListener("DOMContentLoaded", function () {
         imageElement.style.display = "block"; // Show the image
         reloadButton.style.display = "block"; // Show the reload button when the image is displayed
         footerElement.style.display = "block";
+
+        if (originalPromptElement) {
+          originalPromptElement.value = originalDescription; // Set the original prompt text
+          originalPromptElement.style.display = "block"; // Show the textarea
+          adjustTextAreaHeight(originalPromptElement); // Adjust the height
+        }
         // Set the description textarea width to match the image width
         if (descriptionElement) {
-          descriptionElement.value = description; // Set the description text
+          const rDescription = "Revised Prompt: " + revisedDescription;
+          descriptionElement.value = rDescription; // Set the description text
           descriptionElement.style.display = "block"; // Show the textarea
           adjustTextAreaHeight(descriptionElement); // Adjust the height if you have this function
         }
@@ -129,7 +141,11 @@ document.addEventListener("DOMContentLoaded", function () {
       })
         .then((response) => response.json())
         .then((data) => {
-          displayImageAndDescription(data.imageUrl, data.description); // Display the image and description
+          displayImageAndDescription(
+            data.imageUrl,
+            data.description,
+            data.revisedPrompt
+          ); // Display the image and description
           stopCamera(); // Stop the camera after taking the picture
           //captureButton.style.display = "none"; // Hide the capture button
 

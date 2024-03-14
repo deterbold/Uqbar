@@ -31,18 +31,17 @@
      <!-- Canvas for Processing (Hidden) -->
      <canvas id="canvas" width="640" height="480" style="display:none;"></canvas>
 
-     <!-- Content Container -->
      <div id="contentContainer">
-         <img id="generatedImage" alt="Generated Image" style="display:none;">
-         <!-- Reload Button with Icon -->
-         <button id="reloadButton" style="display: none;">
-             <i class="fas fa-redo"></i> <!-- Using Font Awesome's redo icon -->
-         </button>
-         <div id="textContainer"> <!-- Container for text areas -->
-             <textarea id="environmentalImpact" readonly style="display:none;"></textarea>
-             <textarea id="imageDescription" readonly style="display:none;"></textarea>
-         </div>
-     </div>
+        <textarea id="environmentalImpact" readonly style="display:none;"></textarea> <!-- Above the image -->
+        <img id="generatedImage" alt="Generated Image" style="display:none;">
+        <textarea id="originalPrompt" readonly style="display:none;"></textarea> <!-- New element, right below the image -->
+        <textarea id="imageDescription" readonly style="display:none;"></textarea> <!-- Below the image -->
+        <!-- Reload Button with Icon -->
+        <button id="reloadButton" style="display: none;">
+            <i class="fas fa-redo"></i> <!-- Using Font Awesome's redo icon -->
+        </button>
+    </div>
+    
  
      <!-- Loading Animation (Initially Hidden) -->
      <div id="loadingAnimation" style="display: none;">

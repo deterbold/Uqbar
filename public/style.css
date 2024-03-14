@@ -79,6 +79,18 @@ body {
     display: none;
 }
 
+#originalPrompt {
+    width: 100%; /* Full width on mobile for better readability */
+    margin-top: 10px; /* Space above the textarea */
+    background-color: #fff1cc; /* Matching the other text areas */
+    border: 1px solid #e8e8e8; /* Consistent with other text areas */
+    padding: 10px; /* Inner padding */
+    font-size: 16px; /* Readable font size */
+    resize: none; /* Prevent resizing */
+    display: none; /* Initially hidden, displayed via JavaScript */
+}
+
+
 @media (min-width: 768px) { /* Adjustments for tablets and larger screens */
     #webcamContainer button, #generatedImage, #imageDescription, #environmentalImpact {
         padding: 10px 20px;
@@ -86,19 +98,22 @@ body {
         margin-top: 20px; /* Increase spacing */
     }
 
-    #contentContainer, #imageImpactContainer {
+    #imageImpactContainer {
         flex-direction: row; /* Align elements side by side on larger screens */
         justify-content: center;
         gap: 20px; /* Space between elements */
         width: 75%; /* Adjust container width for larger screens */
     }
 
-    #environmentalImpact {
-        width: 30%; /* Adjust the width of environmental impact section */
+    #contentContainer {
+        flex-direction: column; /* Keep column layout */
+        align-items: center; /* Center the content */
+        width: 75%; /* Adjust container width for larger screens */
     }
 
-    #generatedImage, #imageDescription {
-        width: 60%; /* Adjust the width for larger screens */
+    #generatedImage, #imageDescription, #environmentalImpact {
+        width: 60%; /* Make the image and texts wider on larger screens */
+        margin-top: 20px; /* Increase spacing */
     }
 }
 

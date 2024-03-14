@@ -109,7 +109,7 @@ app.post("/upload", upload.single("image"), async (req, res) => {
     );
 
     // Send the URL of the generated image and the description back to the client
-    res.json({ imageUrl, description: revisedPrompt }); // Include the description in the response
+    res.json({ imageUrl, description: description, revisedPrompt }); // Include the description in the response
   } catch (error) {
     console.error("Error:", error);
     res.status(500).send("Internal Server Error");
