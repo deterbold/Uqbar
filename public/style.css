@@ -7,7 +7,13 @@ body {
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    background-color: #fbd1a2; /* Warm background color */
+    background-color: #fff1cc; /* Warm background color */
+}
+
+#headerImage {
+    max-width: 100%; /* Set a max-width to prevent the image from becoming too large on wider screens */
+    display: block; /* Display block to apply margin auto */
+    height: auto; /* Maintain aspect ratio */
 }
 
 #webcamContainer {
@@ -65,7 +71,7 @@ body {
 #generatedImage, #imageDescription, #environmentalImpact, footer#pageFooter, #sourcesElement {
     width: 100%; /* Full width on mobile for better readability */
     margin-top: 10px;
-    background-color: #fbd1a2;
+    background-color: #fff1cc;
     border: 1px solid #e8e8e8;
     padding: 10px;
     font-size: 16px; /* Adjust font size for better readability on mobile */

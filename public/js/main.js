@@ -5,9 +5,9 @@ document.addEventListener("DOMContentLoaded", function () {
   video.setAttribute("playsinline", ""); // Required to work on iOS Safari
   const canvas = document.getElementById("canvas");
   const context = canvas.getContext("2d");
-  const toggleButton = document.getElementById("toggleButton");
-  toggleButton.textContent = "DALL·E 3";
-  toggleButton.classList.add("active");
+  // const toggleButton = document.getElementById("toggleButton");
+  // toggleButton.textContent = "DALL·E 3";
+  // toggleButton.classList.add("active");
   const captureButton = document.getElementById("capture");
   let stream = null; // Variable to hold the stream reference
   const mobileOnlyButton = document.getElementById("mobileOnlyButton");
@@ -94,22 +94,22 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Toggle button event listener
-  toggleButton.addEventListener("click", function () {
-    if (toggleButton.textContent.includes("2")) {
-      toggleButton.textContent = "DALL·E 3";
-      toggleButton.classList.add("active");
-      // Set the model to DALL·E 3
-    } else {
-      toggleButton.textContent = "DALL·E 2";
-      toggleButton.classList.remove("active");
-      // Set the model to DALL·E 2
-    }
-  });
+  // toggleButton.addEventListener("click", function () {
+  //   if (toggleButton.textContent.includes("2")) {
+  //     toggleButton.textContent = "DALL·E 3";
+  //     toggleButton.classList.add("active");
+  //     // Set the model to DALL·E 3
+  //   } else {
+  //     toggleButton.textContent = "DALL·E 2";
+  //     toggleButton.classList.remove("active");
+  //     // Set the model to DALL·E 2
+  //   }
+  // });
   // Capture button event listener
   captureButton.addEventListener("click", function () {
     // Show the loading animation
     document.getElementById("loadingAnimation").style.display = "flex";
-    document.getElementById("toggleContainer").style.display = "none";
+    //document.getElementById("toggleContainer").style.display = "none";
     captureButton.style.display = "none";
     mobileOnlyButton.style.display = "none";
 
@@ -120,10 +120,7 @@ document.addEventListener("DOMContentLoaded", function () {
     canvas.toBlob(function (blob) {
       const formData = new FormData();
       formData.append("image", blob); // Append the image blob to the form data
-      formData.append(
-        "model",
-        toggleButton.textContent.includes("2") ? "dall-e-2" : "dall-e-3"
-      ); // Add the model selection based on the toggle button text
+      formData.append("model", "dall-e-3"); // Add the model selection based on the toggle button text
 
       // Send the image to the server
       fetch("/upload", {
