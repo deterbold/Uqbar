@@ -26,17 +26,17 @@ app.use(express.static("public"));
 app.post("/upload", upload.single("image"), async (req, res) => {
   try {
     // Create a unique folder for each session
-    const folderPath = createUniqueFolder();
+    //const folderPath = createUniqueFolder();
     // Convert the uploaded image buffer to a Base64 string
     const base64Image = req.file.buffer.toString("base64");
     const timestamp = new Date().toISOString();
 
     const modelSelection = req.body.model; // Get the model selection from the request
 
-    fs.writeFileSync(
-      path.join(folderPath, `webcam_${timestamp}.jpeg`),
-      req.file.buffer
-    );
+    // fs.writeFileSync(
+    //   path.join(folderPath, `webcam_${timestamp}.jpeg`),
+    //   req.file.buffer
+    // );
 
     // Set model and max_tokens based on the selection
     const model = modelSelection === "dall-e-2" ? "dall-e-2" : "dall-e-3";
@@ -79,34 +79,34 @@ app.post("/upload", upload.single("image"), async (req, res) => {
     const imageUrl = imageResponse.data[0].url;
 
     // After receiving the image URL from OpenAI, save the generated image
-    const imageResponseBuffer = await fetch(imageUrl).then((res) =>
-      res.buffer()
-    );
-    fs.writeFileSync(
-      path.join(folderPath, `generated_${timestamp}.jpeg`),
-      imageResponseBuffer
-    );
+    // const imageResponseBuffer = await fetch(imageUrl).then((res) =>
+    //   res.buffer()
+    // );
+    // fs.writeFileSync(
+    //   path.join(folderPath, `generated_${timestamp}.jpeg`),
+    //   imageResponseBuffer
+    // );
 
     const generatedImageFilename = `generated_${timestamp}.jpeg`;
     const webcamImageFilename = `webcam_${timestamp}.jpeg`;
 
     // Create JSON file with the required data
-    const jsonData = {
-      date: new Date().toLocaleDateString(),
-      time: new Date().toLocaleTimeString(),
-      model: model,
-      imageDescription: description, // Assuming this comes from your OpenAI API interaction
-      generatedImageFilename: generatedImageFilename,
-      webcamImageFilename: webcamImageFilename,
-    };
-    // Include revisedPrompt in JSON data if it's not undefined
-    if (revisedPrompt !== undefined) {
-      jsonData.revisedPrompt = revisedPrompt;
-    }
-    fs.writeFileSync(
-      path.join(folderPath, "data.json"),
-      JSON.stringify(jsonData, null, 2)
-    );
+    // const jsonData = {
+    //   date: new Date().toLocaleDateString(),
+    //   time: new Date().toLocaleTimeString(),
+    //   model: model,
+    //   imageDescription: description, // Assuming this comes from your OpenAI API interaction
+    //   generatedImageFilename: generatedImageFilename,
+    //   webcamImageFilename: webcamImageFilename,
+    // };
+    // // Include revisedPrompt in JSON data if it's not undefined
+    // if (revisedPrompt !== undefined) {
+    //   jsonData.revisedPrompt = revisedPrompt;
+    // }
+    // fs.writeFileSync(
+    //   path.join(folderPath, "data.json"),
+    //   JSON.stringify(jsonData, null, 2)
+    // );
 
     // Send the URL of the generated image and the description back to the client
     res.json({ imageUrl, description: description, revisedPrompt }); // Include the description in the response
@@ -129,14 +129,14 @@ app.listen(process.env.PORT || port, () => {
 
 //SAVING DATA FUNCTIONS
 // Utility function to create a unique folder for each session
-function createUniqueFolder() {
-  const date = new Date();
-  const folderName = `Echo_${date.toISOString().replace(/:/g, "-")}`;
-  const dir = path.join(__dirname, "uploads", folderName);
+// function createUniqueFolder() {
+//   const date = new Date();
+//   const folderName = `Echo_${date.toISOString().replace(/:/g, "-")}`;
+//   const dir = path.join(__dirname, "uploads", folderName);
 
-  if (!fs.existsSync(dir)) {
-    fs.mkdirSync(dir, { recursive: true });
-  }
+//   if (!fs.existsSync(dir)) {
+//     fs.mkdirSync(dir, { recursive: true });
+//   }
 
-  return dir;
-}
+//   return dir;
+// }
