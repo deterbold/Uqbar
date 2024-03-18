@@ -68,7 +68,7 @@ body {
     margin: auto;
 }
 
-#generatedImage, #imageDescription, #environmentalImpact, footer#pageFooter, #sourcesElement {
+#generatedImage, #imageDescription, #environmentalImpact, #originalPrompt {
     width: 100%; /* Full width on mobile for better readability */
     margin-top: 10px;
     background-color: #fff1cc;
@@ -79,16 +79,41 @@ body {
     display: none;
 }
 
-#originalPrompt {
+#downloadButton {
+    padding: 8px 16px; /* Adjust padding as needed */
+    font-size: 16px; /* Adjust font size as needed */
+    cursor: pointer;
+    border: none;
+    border-radius: 5px; /* Rounded corners */
+    background-color: #4CAF50; /* Green background */
+    color: white; /* White text color */
+    margin-top: 20px; /* Space above the button */
+    align-self: center; /* Center the button within its container */
+    display: none; /* Initially hidden, shown via JavaScript */
+}
+
+#sourcesElement {
     width: 100%; /* Full width on mobile for better readability */
-    margin-top: 10px; /* Space above the textarea */
-    background-color: #fff1cc; /* Matching the other text areas */
-    border: 1px solid #e8e8e8; /* Consistent with other text areas */
-    padding: 10px; /* Inner padding */
-    font-size: 16px; /* Readable font size */
-    resize: none; /* Prevent resizing */
+    margin-top: 10px;
+    background-color: #fff1cc;
+    border: 1px solid #e8e8e8;
+    padding: 10px;
+    font-size: 16px; /* Adjust font size for better readability on mobile */
+    resize: vertical;
+    display: none;
+}
+
+footer#pageFooter {
+    width: 100%;
+    background-color: #fbd1a2; /* Match the page's background color or choose a different one for the footer */
+    padding: 20px 10px; /* Add some padding for spacing */
+    box-sizing: border-box; /* Include padding in the element's total width and height */
+    text-align: center; /* Center the text inside the footer */
+    border-top: 1px solid #e8e8e8; /* Optional: add a border on top for visual separation */
     display: none; /* Initially hidden, displayed via JavaScript */
 }
+
+
 
 
 @media (min-width: 768px) { /* Adjustments for tablets and larger screens */
@@ -111,7 +136,7 @@ body {
         width: 75%; /* Adjust container width for larger screens */
     }
 
-    #generatedImage, #imageDescription, #environmentalImpact {
+    #generatedImage, #imageDescription, #environmentalImpact, #originalPrompt {
         width: 60%; /* Make the image and texts wider on larger screens */
         margin-top: 20px; /* Increase spacing */
     }

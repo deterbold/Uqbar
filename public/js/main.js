@@ -57,30 +57,35 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function displayImageAndDescription(
+    originalImageUrl,
     imageUrl,
     originalDescription,
     revisedDescription
   ) {
+    const originalImageElement = document.getElementById("originalImage");
     const imageElement = document.getElementById("generatedImage");
     const reloadButton = document.getElementById("reloadButton");
     const originalPromptElement = document.getElementById("originalPrompt");
     const descriptionElement = document.getElementById("imageDescription");
     const impactElement = document.getElementById("environmentalImpact");
     const footerElement = document.getElementById("pageFooter");
+    const sourcesElement = document.getElementById("sourcesElement");
 
-    if (imageElement) {
+    if (originalImageElement && imageElement) {
+      originalImageElement.src = originalImageUrl;
       imageElement.src = imageUrl;
       imageElement.onload = function () {
         // Ensure the image is loaded before displaying and setting widths
-        imageElement.style.display = "block"; // Show the image
-        reloadButton.style.display = "block"; // Show the reload button when the image is displayed
-        footerElement.style.display = "block";
-
+        originalImageElement.style.display = "block"; // Show the original image
         if (originalPromptElement) {
           originalPromptElement.value = originalDescription; // Set the original prompt text
           originalPromptElement.style.display = "block"; // Show the textarea
           adjustTextAreaHeight(originalPromptElement); // Adjust the height
         }
+        imageElement.style.display = "block"; // Show the image
+        reloadButton.style.display = "block"; // Show the reload button when the image is displayed
+        footerElement.style.display = "block";
+
         // Set the description textarea width to match the image width
         if (descriptionElement) {
           const rDescription = "Revised Prompt: " + revisedDescription;
@@ -95,6 +100,10 @@ document.addEventListener("DOMContentLoaded", function () {
           impactElement.style.display = "block";
           impactElement.value = `For this interaction, ChatGPT has used approximately ${randomWaterUsage} ml of water (about half a espresso), and released approximately ${randomCO2}g of CO2 (a regular Google search uses around 0,2 g.).`;
           adjustTextAreaHeight(impactElement); // Adjust the height if you have this function
+        }
+
+        if (sourcesElement) {
+          sourcesElement.style.display = "block";
         }
       };
       // Event listener for the reload button
@@ -128,6 +137,7 @@ document.addEventListener("DOMContentLoaded", function () {
     video.style.display = "none"; // Hide the video element
 
     context.drawImage(video, 0, 0, canvas.width, canvas.height);
+    const originalImageUrl = canvas.toDataURL("image/jpeg");
     // Draw the video frame to the canvas
     canvas.toBlob(function (blob) {
       const formData = new FormData();
@@ -142,6 +152,7 @@ document.addEventListener("DOMContentLoaded", function () {
         .then((response) => response.json())
         .then((data) => {
           displayImageAndDescription(
+            originalImageUrl,
             data.imageUrl,
             data.description,
             data.revisedPrompt

@@ -33,10 +33,14 @@
 
      <div id="contentContainer">
         <textarea id="environmentalImpact" readonly style="display:none;"></textarea> <!-- Above the image -->
-        <img id="generatedImage" alt="Generated Image" style="display:none;">
-        <textarea id="originalPrompt" readonly style="display:none;"></textarea> <!-- New element, right below the image -->
+         <!-- Original Image -->
+         <img id="originalImage" src="original-image.jpg" alt="Original Image" style="display:none;"> <!-- New original image element -->
+         <textarea id="originalPrompt" readonly style="display:none;"></textarea> <!-- New element, right below the image -->
+        
+         <img id="generatedImage" alt="Generated Image" style="display:none;">
         <textarea id="imageDescription" readonly style="display:none;"></textarea> <!-- Below the image -->
         <!-- Reload Button with Icon -->
+        
         <button id="reloadButton" style="display: none;">
             <i class="fas fa-redo"></i> <!-- Using Font Awesome's redo icon -->
         </button>
