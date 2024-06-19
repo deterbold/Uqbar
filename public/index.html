@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Echo</title>
+    <title>gpt·aisplaining·us</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,48 +11,48 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 </head>
 <body>
-   
+    <!-- Header Image -->
+    <img id="headerImage" src="header-image.jpg" alt="Header Image">
+
     <!-- Webcam and Capture Button Container -->
     <div id="webcamContainer">
         <video id="video" autoplay></video>
-        <button id="capture">capture</button>
+        <button id="capture">CAPTURE</button>
+        <button id="uploadButton">UPLOAD</button>
+        <button id="modelButton">Model: DALL·E 2</button>
         <button id="mobileOnlyButton" style="display: none;">
             <i class="fas fa-sync-alt"></i>
         </button>
-         <!-- Toggle Button Container -->
-        <div id="toggleContainer">
-            <button id="toggleButton">DALL·E 2</button>
-        </div>
     </div>
 
-    <!-- Canvas for Processing (Hidden) -->
-    <canvas id="canvas" width="640" height="480" style="display:none;"></canvas>
+    <!-- File input for image upload (hidden) -->
+    <input type="file" id="uploadImage" accept="image/*" style="display: none;">
 
-    <div id="contentContainer">
-        <div id="imageImpactContainer">
-            <textarea id="environmentalImpact" readonly style="display:none;"></textarea>
-            <img id="generatedImage" alt="Generated Image" style="display:none;">
-            <!-- Reload Button with Icon -->
-            <button id="reloadButton" style="display: none;">
-                <i class="fas fa-redo"></i> <!-- Using Font Awesome's redo icon -->
-            </button>
-        </div>
-        <textarea id="imageDescription" readonly style="display:none;"></textarea>
+     <!-- Canvas for Processing (Hidden) -->
+     <canvas id="canvas" width="640" height="480" style="display:none;"></canvas>
+
+     <div id="contentContainer">
+        <textarea id="environmentalImpact" readonly style="display:none;"></textarea> <!-- Above the image -->
+         <!-- Original Image -->
+         <img id="originalImage" src="original-image.jpg" alt="Original Image" style="display:none;"> <!-- New original image element -->
+         <textarea id="originalPrompt" readonly style="display:none;"></textarea> <!-- New element, right below the image -->
+        
+         <img id="generatedImage" alt="Generated Image" style="display:none;">
+        <textarea id="imageDescription" readonly style="display:none;"></textarea> <!-- Below the image -->
+        <!-- Reload Button with Icon -->
+        
+        <button id="reloadButton" style="display: none;">
+            <i class="fas fa-redo"></i> <!-- Using Font Awesome's redo icon -->
+        </button>
     </div>
     
-    
-    <!-- Description Text Area (Initially Hidden) -->
-    <textarea id="imageDescription" readonly style="display:none;"></textarea>
-
-    <!-- New TextArea for Environmental Impact -->
-    <textarea id="environmentalImpact" readonly style="display:none;"></textarea>
-
-    <!-- Loading Animation (Initially Hidden) -->
-    <div id="loadingAnimation" style="display: none;">
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-    </div>
+ 
+     <!-- Loading Animation (Initially Hidden) -->
+     <div id="loadingAnimation" style="display: none;">
+         <span class="dot"></span>
+         <span class="dot"></span>
+         <span class="dot"></span>
+     </div>
 
     <footer id="pageFooter">
         <div id="sourcesElement"> <a href="https://arxiv.org/pdf/2304.03271.pdf" target="_blank">GPT Water Usage Source</a> || <a href="https://mlco2.github.io/impact/#compute" target="_blank">GPT CO2 Usage Source</a></div>

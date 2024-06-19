@@ -7,7 +7,13 @@ body {
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    background-color: #fbd1a2; /* Warm background color */
+    background-color: #fff1cc; /* Warm background color */
+}
+
+#headerImage {
+    max-width: 100%; /* Set a max-width to prevent the image from becoming too large on wider screens */
+    display: block; /* Display block to apply margin auto */
+    height: auto; /* Maintain aspect ratio */
 }
 
 #webcamContainer {
@@ -31,6 +37,17 @@ body {
     background-color: #4CAF50;
     color: white;
     margin-top: 10px; /* Reduce space between the video and the button on mobile */
+}
+
+#capture, #uploadButton, #modelButton {
+    padding: 8px 16px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    color: white;
+    margin: 10px 5px; /* Space around each button */
 }
 
 #loadingAnimation {
@@ -62,15 +79,49 @@ body {
     margin: auto;
 }
 
-#generatedImage, #imageDescription, #environmentalImpact, footer#pageFooter, #sourcesElement {
+#generatedImage, #imageDescription, #environmentalImpact, #originalPrompt {
     width: 100%; /* Full width on mobile for better readability */
     margin-top: 10px;
-    background-color: #fbd1a2;
+    background-color: #fff1cc;
     border: 1px solid #e8e8e8;
     padding: 10px;
     font-size: 16px; /* Adjust font size for better readability on mobile */
     resize: vertical;
     display: none;
+}
+
+#downloadButton {
+    padding: 8px 16px; /* Adjust padding as needed */
+    font-size: 16px; /* Adjust font size as needed */
+    cursor: pointer;
+    border: none;
+    border-radius: 5px; /* Rounded corners */
+    background-color: #4CAF50; /* Green background */
+    color: white; /* White text color */
+    margin-top: 20px; /* Space above the button */
+    align-self: center; /* Center the button within its container */
+    display: none; /* Initially hidden, shown via JavaScript */
+}
+
+#sourcesElement {
+    width: 100%; /* Full width on mobile for better readability */
+    margin-top: 10px;
+    background-color: #fff1cc;
+    border: 1px solid #e8e8e8;
+    padding: 10px;
+    font-size: 16px; /* Adjust font size for better readability on mobile */
+    resize: vertical;
+    display: none;
+}
+
+footer#pageFooter {
+    width: 100%;
+    background-color: #fbd1a2; /* Match the page's background color or choose a different one for the footer */
+    padding: 20px 10px; /* Add some padding for spacing */
+    box-sizing: border-box; /* Include padding in the element's total width and height */
+    text-align: center; /* Center the text inside the footer */
+    border-top: 1px solid #e8e8e8; /* Optional: add a border on top for visual separation */
+    display: none; /* Initially hidden, displayed via JavaScript */
 }
 
 @media (min-width: 768px) { /* Adjustments for tablets and larger screens */
@@ -80,19 +131,22 @@ body {
         margin-top: 20px; /* Increase spacing */
     }
 
-    #contentContainer, #imageImpactContainer {
+    #imageImpactContainer {
         flex-direction: row; /* Align elements side by side on larger screens */
         justify-content: center;
         gap: 20px; /* Space between elements */
         width: 75%; /* Adjust container width for larger screens */
     }
 
-    #environmentalImpact {
-        width: 30%; /* Adjust the width of environmental impact section */
+    #contentContainer {
+        flex-direction: column; /* Keep column layout */
+        align-items: center; /* Center the content */
+        width: 75%; /* Adjust container width for larger screens */
     }
 
-    #generatedImage, #imageDescription {
-        width: 60%; /* Adjust the width for larger screens */
+    #generatedImage, #imageDescription, #environmentalImpact, #originalPrompt {
+        width: 60%; /* Make the image and texts wider on larger screens */
+        margin-top: 20px; /* Increase spacing */
     }
 }
 
