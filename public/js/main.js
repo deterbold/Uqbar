@@ -5,10 +5,9 @@ document.addEventListener("DOMContentLoaded", function () {
   video.setAttribute("playsinline", ""); // Required to work on iOS Safari
   const canvas = document.getElementById("canvas");
   const context = canvas.getContext("2d");
-  // const toggleButton = document.getElementById("toggleButton");
-  // toggleButton.textContent = "DALL·E 3";
-  // toggleButton.classList.add("active");
   const captureButton = document.getElementById("capture");
+  const uploadButton = document.getElementById("uploadButton");
+  const uploadInput = document.getElementById("uploadImage");
   let stream = null; // Variable to hold the stream reference
   const mobileOnlyButton = document.getElementById("mobileOnlyButton");
   let facingMode = "user";
@@ -25,7 +24,6 @@ document.addEventListener("DOMContentLoaded", function () {
         .then(function (mediaStream) {
           stream = mediaStream; // Store the stream reference
           video.srcObject = mediaStream;
-          //video.play(); // Ensure the video plays
         })
         .catch(function (error) {
           console.log("Error accessing the webcam", error);
@@ -114,60 +112,80 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  // Toggle button event listener
-  // toggleButton.addEventListener("click", function () {
-  //   if (toggleButton.textContent.includes("2")) {
-  //     toggleButton.textContent = "DALL·E 3";
-  //     toggleButton.classList.add("active");
-  //     // Set the model to DALL·E 3
-  //   } else {
-  //     toggleButton.textContent = "DALL·E 2";
-  //     toggleButton.classList.remove("active");
-  //     // Set the model to DALL·E 2
-  //   }
-  // });
-  // Capture button event listener
-  captureButton.addEventListener("click", function () {
+  function processImage(blob, originalImageUrl) {
+    const formData = new FormData();
+    formData.append("image", blob); // Append the image blob to the form data
+    formData.append("model", "dall-e-3"); // Add the model selection based on the toggle button text
+
     // Show the loading animation
     document.getElementById("loadingAnimation").style.display = "flex";
-    //document.getElementById("toggleContainer").style.display = "none";
-    captureButton.style.display = "none";
-    mobileOnlyButton.style.display = "none";
 
+    // Send the image to the server
+    fetch("/upload", {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        displayImageAndDescription(
+          originalImageUrl,
+          data.imageUrl,
+          data.description,
+          data.revisedPrompt
+        ); // Display the image and description
+        stopCamera(); // Stop the camera after taking the picture
+        // Hide the loading animation once the image is received
+        document.getElementById("loadingAnimation").style.display = "none";
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        document.getElementById("loadingAnimation").style.display = "none";
+      });
+  }
+
+  // Capture button event listener
+  captureButton.addEventListener("click", function () {
+    // Hide the elements
+    captureButton.style.display = "none";
+    uploadButton.style.display = "none";
+    mobileOnlyButton.style.display = "none";
     video.style.display = "none"; // Hide the video element
 
     context.drawImage(video, 0, 0, canvas.width, canvas.height);
     const originalImageUrl = canvas.toDataURL("image/jpeg");
-    // Draw the video frame to the canvas
+
     canvas.toBlob(function (blob) {
-      const formData = new FormData();
-      formData.append("image", blob); // Append the image blob to the form data
-      formData.append("model", "dall-e-3"); // Add the model selection based on the toggle button text
-
-      // Send the image to the server
-      fetch("/upload", {
-        method: "POST",
-        body: formData,
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          displayImageAndDescription(
-            originalImageUrl,
-            data.imageUrl,
-            data.description,
-            data.revisedPrompt
-          ); // Display the image and description
-          stopCamera(); // Stop the camera after taking the picture
-          //captureButton.style.display = "none"; // Hide the capture button
-
-          // Hide the loading animation once the image is received
-          document.getElementById("loadingAnimation").style.display = "none";
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-          document.getElementById("loadingAnimation").style.display = "none";
-        });
+      processImage(blob, originalImageUrl);
     }, "image/jpeg");
+  });
+
+  // Upload button event listener
+  uploadButton.addEventListener("click", function () {
+    uploadInput.click(); // Trigger the file input click
+  });
+
+  // Handle image upload
+  uploadInput.addEventListener("change", function (event) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const originalImageUrl = e.target.result;
+
+        // Show the loading animation
+        document.getElementById("loadingAnimation").style.display = "flex";
+
+        // Hide the buttons and stop the webcam
+        captureButton.style.display = "none";
+        uploadButton.style.display = "none";
+        mobileOnlyButton.style.display = "none";
+        stopCamera();
+        video.style.display = "none"; // Hide the video element
+
+        processImage(file, originalImageUrl);
+      };
+      reader.readAsDataURL(file);
+    }
   });
 
   mobileOnlyButton.addEventListener("click", function () {
@@ -182,7 +200,6 @@ document.addEventListener("DOMContentLoaded", function () {
     return /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(
       userAgent
     );
-    console.log(userAgent);
   }
   if (isMobileDevice()) {
     console.log("mobile device");
