@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // Set the description textarea width to match the image width
         if (descriptionElement) {
           const rDescription = "Revised Prompt: " + revisedDescription;
-          descriptionElement.value = rDescription; // Set the description text
+          descriptionElement.value = rDescription; // Set the description text here
           descriptionElement.style.display = "block"; // Show the textarea
           adjustTextAreaHeight(descriptionElement); // Adjust the height if you have this function
         }
