@@ -7,10 +7,12 @@ document.addEventListener("DOMContentLoaded", function () {
   const context = canvas.getContext("2d");
   const captureButton = document.getElementById("capture");
   const uploadButton = document.getElementById("uploadButton");
+  const modelButton = document.getElementById("modelButton");
   const uploadInput = document.getElementById("uploadImage");
   let stream = null; // Variable to hold the stream reference
   const mobileOnlyButton = document.getElementById("mobileOnlyButton");
   let facingMode = "user";
+  let selectedModel = "dall-e-2"; // Default model is DALL·E 2
 
   // Access the webcam with the given facing mode
   function getCameraStream() {
@@ -88,6 +90,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (descriptionElement) {
           const rDescription = "Revised Prompt: " + revisedDescription;
           descriptionElement.value = rDescription; // Set the description text here
+
           descriptionElement.style.display = "block"; // Show the textarea
           adjustTextAreaHeight(descriptionElement); // Adjust the height if you have this function
         }
@@ -115,7 +118,8 @@ document.addEventListener("DOMContentLoaded", function () {
   function processImage(blob, originalImageUrl) {
     const formData = new FormData();
     formData.append("image", blob); // Append the image blob to the form data
-    formData.append("model", "dall-e-3"); // Add the model selection based on the toggle button text
+
+    formData.append("model", selectedModel); // Add the model selection based on the model button text
 
     // Show the loading animation
     document.getElementById("loadingAnimation").style.display = "flex";
@@ -148,6 +152,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Hide the elements
     captureButton.style.display = "none";
     uploadButton.style.display = "none";
+    modelButton.style.display = "none";
     mobileOnlyButton.style.display = "none";
     video.style.display = "none"; // Hide the video element
 
@@ -178,6 +183,9 @@ document.addEventListener("DOMContentLoaded", function () {
         // Hide the buttons and stop the webcam
         captureButton.style.display = "none";
         uploadButton.style.display = "none";
+
+        modelButton.style.display = "none";
+
         mobileOnlyButton.style.display = "none";
         stopCamera();
         video.style.display = "none"; // Hide the video element
@@ -191,6 +199,17 @@ document.addEventListener("DOMContentLoaded", function () {
   mobileOnlyButton.addEventListener("click", function () {
     facingMode = facingMode === "user" ? "environment" : "user";
     getCameraStream(); // Re-fetch the camera stream with the new facing mode
+  });
+
+  // Model button event listener
+  modelButton.addEventListener("click", function () {
+    if (selectedModel === "dall-e-2") {
+      selectedModel = "dall-e-3";
+      modelButton.textContent = "Model: DALL·E 3";
+    } else {
+      selectedModel = "dall-e-2";
+      modelButton.textContent = "Model: DALL·E 2";
+    }
   });
 
   // Function to detect a mobile device

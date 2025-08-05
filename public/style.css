@@ -44,6 +44,17 @@ body {
     color: white;
 }
 
+#capture, #uploadButton, #modelButton {
+    padding: 8px 16px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    color: white;
+    margin: 10px 5px; /* Space around each button */
+}
+
 #loadingAnimation {
     display: flex;
     justify-content: center;

@@ -15,7 +15,7 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_KEY,
 });
 
-// Setup multer for file handling
+// Setup multer for file handling for example
 const storage = multer.memoryStorage(); // Use memory storage to handle file as buffer
 const upload = multer({ storage: storage });
 
@@ -45,7 +45,7 @@ app.post("/upload", upload.single("image"), async (req, res) => {
 
     // Prepare the payload for the OpenAI API
     const response = await openai.chat.completions.create({
-      model: "gpt-4.1-mini",
+      model: "gpt-4o",
       messages: [
         {
           role: "user",
