@@ -1,59 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>gpt·aisplaining·us</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Prata&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-</head>
-<body>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Prata&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    />
+  </head>
+  <body>
     <!-- Header Image -->
-    <img id="headerImage" src="header-image.jpg" alt="Header Image">
+    <img id="headerImage" src="header-image.jpg" alt="Header Image" />
 
     <!-- Webcam and Capture Button Container -->
     <div id="webcamContainer">
-        <video id="video" autoplay></video>
-        <div class="buttonContainer">
-            <button id="capture">CAPTURE</button>
-            <input type="file" id="uploadImage" accept="image/*" style="display: none;">
-            <button id="uploadButton">UPLOAD</button>
-            <button id="mobileOnlyButton" style="display: none;">
-                <i class="fas fa-sync-alt"></i>
-            </button>
-        </div>
+      <video id="video" autoplay></video>
+      <button id="capture">CAPTURE</button>
+      <button id="uploadButton">UPLOAD</button>
+      <button id="modelButton">Model: DALL·E 2</button>
+      <button id="mobileOnlyButton" style="display: none">
+        <i class="fas fa-sync-alt"></i>
+      </button>
     </div>
 
+    <!-- File input for image upload (hidden) -->
+    <input
+      type="file"
+      id="uploadImage"
+      accept="image/*"
+      style="display: none"
+    />
+
     <!-- Canvas for Processing (Hidden) -->
-    <canvas id="canvas" width="640" height="480" style="display:none;"></canvas>
+    <canvas id="canvas" width="640" height="480" style="display: none"></canvas>
 
     <div id="contentContainer">
-        <textarea id="environmentalImpact" readonly style="display:none;"></textarea> <!-- Above the image -->
-        <img id="originalImage" src="original-image.jpg" alt="Original Image" style="display:none;"> <!-- New original image element -->
-        <textarea id="originalPrompt" readonly style="display:none;"></textarea> <!-- New element, right below the image -->
-        <img id="generatedImage" alt="Generated Image" style="display:none;">
-        <textarea id="imageDescription" readonly style="display:none;"></textarea> <!-- Below the image -->
-        <!-- Reload Button with Icon -->
-        <button id="reloadButton" style="display: none;">
-            <i class="fas fa-redo"></i> <!-- Using Font Awesome's redo icon -->
-        </button>
+      <textarea
+        id="environmentalImpact"
+        readonly
+        style="display: none"
+      ></textarea>
+      <!-- Above the image -->
+      <!-- Original Image -->
+      <img id="originalImage" alt="Original Image" style="display: none" />
+      <!-- New original image element -->
+      <textarea id="originalPrompt" readonly style="display: none"></textarea>
+      <!-- New element, right below the image -->
+
+      <img id="generatedImage" alt="Generated Image" style="display: none" />
+      <textarea id="imageDescription" readonly style="display: none"></textarea>
+      <!-- Below the image -->
+      <!-- Reload Button with Icon -->
+
+      <button id="reloadButton" style="display: none">
+        <i class="fas fa-redo"></i>
+        <!-- Using Font Awesome's redo icon -->
+      </button>
     </div>
 
     <!-- Loading Animation (Initially Hidden) -->
-    <div id="loadingAnimation" style="display: none;">
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
+    <div id="loadingAnimation" style="display: none">
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
     </div>
 
     <footer id="pageFooter">
-        <div id="sourcesElement"> <a href="https://arxiv.org/pdf/2304.03271.pdf" target="_blank">GPT Water Usage Source</a> || <a href="https://mlco2.github.io/impact/#compute" target="_blank">GPT CO2 Usage Source</a></div>
+      <div id="sourcesElement">
+        <a href="https://arxiv.org/pdf/2304.03271.pdf" target="_blank"
+          >GPT Water Usage Source</a
+        >
+        ||
+        <a href="https://mlco2.github.io/impact/#compute" target="_blank"
+          >GPT CO2 Usage Source</a
+        >
+      </div>
     </footer>
 
     <!-- Link to the main.js script -->
     <script src="js/main.js"></script>
-</body>
+  </body>
 </html>
