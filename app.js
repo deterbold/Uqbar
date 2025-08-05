@@ -14,7 +14,7 @@ const openai = new OpenAI({
 });
 console.log(process.env.OPENAI_KEY);
 
-// Setup multer for file handling
+// Setup multer for file handling for example
 const storage = multer.memoryStorage(); // Use memory storage to handle file as buffer
 const upload = multer({ storage: storage });
 
