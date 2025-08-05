@@ -35,7 +35,7 @@ app.post("/upload", upload.single("image"), async (req, res) => {
 
     // Prepare the payload for the OpenAI API
     const response = await openai.chat.completions.create({
-      model: "gpt-4-vision-preview",
+      model: "gpt-4o",
       messages: [
         {
           role: "user",
